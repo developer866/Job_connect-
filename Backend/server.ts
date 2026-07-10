@@ -5,6 +5,11 @@ import dotenv from "dotenv";
 import connectDB from "./config/db";
 import initSocket from "./config/socket";
 import setupSwagger from "./config/swagger";
+import {
+  strictLimiter,
+  employerLimiter,
+  publicLimiter,
+} from "./middleware/rateLimiter";
 
 
 // Import Routes
@@ -34,13 +39,13 @@ setupSwagger(app)
 // Job Routes
 app.use("/api", jobRoutes);
 // Auth
-app.use('/api',authRoutes)
+app.use('/api',strictLimiter,authRoutes)
 // Application 
-app.use("/api",applicationRoutes)
+app.use("/api",employerLimiter,applicationRoutes)
 // Notification
-app.use("/api",notificationRoutes)
+app.use("/api",publicLimiter,notificationRoutes)
 // Admin
-app.use("/api",adminRoutes)
+app.use("/api",strictLimiter,adminRoutes)
 
 
 // Health cheack
