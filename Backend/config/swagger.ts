@@ -1,8 +1,8 @@
-import swaggerJSDoc, { Options } from "swagger-jsdoc";
+import swaggerJSDoc from "swagger-jsdoc";
 import swaggerUi from "swagger-ui-express";
 import { Express } from "express";
 
-const swaggerDefinition: Options = {
+const swaggerDefinition: any = {
   definition: {
     openapi: "3.0.0",
     info: {

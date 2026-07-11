@@ -102,9 +102,10 @@ const router = Router();
  *         description: Not authorized
  */
 
-
+import { validateJob } from "../middleware/validate";
+import { employerLimiter } from "../middleware/rateLimiter";
 // ── Public routes ──
-router.get("/jobs", jobController.getAllJobs)
+router.get("/jobs",validateJob,employerLimiter, jobController.getAllJobs)
 router.get("/jobs/:id", jobController.getSingleJob)
 
 // ── Protected routes — employer only ──

@@ -3,12 +3,12 @@ import http from "http";
 import cors from "cors";
 import dotenv from "dotenv";
 import connectDB from "./config/db";
+dotenv.config();
 import initSocket from "./config/socket";
 import setupSwagger from "./config/swagger";
+import helmet from "helmet";
 import {
-  strictLimiter,
-  employerLimiter,
-  publicLimiter,
+  strictLimiter
 } from "./middleware/rateLimiter";
 
 
@@ -19,15 +19,23 @@ import applicationRoutes from "./routes/applicationRoutes"
 import notificationRoutes from "./routes/notificationRoutes"
 import adminRoutes from "./routes/adminRoutes"
 
-dotenv.config();
 
 const app: Express = express();
 const server = http.createServer(app);
+app.use(helmet())
 
 // Middleware
-app.use(cors());
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+app.use(cors({
+  origin: process.env.FRONTEND_URL || "http://localhost:3000",
+  methods: ["GET", "POST", "PATCH", "DELETE"],
+  credentials: true
+}))
+
+// app.use(express.json());
+// app.use(express.urlencoded({ extended: true }));
+
+app.use(express.json({ limit: "10kb" }))
+app.use(express.urlencoded({ extended: true, limit: "10kb" }))
 const port = 3000;
 
 // Socket.io 
@@ -39,11 +47,11 @@ setupSwagger(app)
 // Job Routes
 app.use("/api", jobRoutes);
 // Auth
-app.use('/api',strictLimiter,authRoutes)
+app.use('/api',authRoutes)
 // Application 
-app.use("/api",employerLimiter,applicationRoutes)
+app.use("/api",applicationRoutes)
 // Notification
-app.use("/api",publicLimiter,notificationRoutes)
+app.use("/api",notificationRoutes)
 // Admin
 app.use("/api",strictLimiter,adminRoutes)
 

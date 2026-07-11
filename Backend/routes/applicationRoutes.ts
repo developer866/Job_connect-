@@ -95,8 +95,10 @@ const router = Router()
  */
 
 // ── Jobseeker routes ──
+import { validateApplication } from "../middleware/validate"
 router.post(
   "/jobs/:id/apply",
+  validateApplication,
   protect,
   authorize("jobseeker"),
   applicationController.appliedJob

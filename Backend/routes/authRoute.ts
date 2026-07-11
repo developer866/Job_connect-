@@ -71,10 +71,17 @@ import User from "../models/User"
  *       401:
  *         description: Not authorized
  */
-
+import { validateRegister,validateLogin } from "../middleware/validate";
+import { strictLimiter } from "../middleware/rateLimiter";
 const router = Router()
-router.post('/auth/login',authController.login)
-router.post('/auth/register',authController.register)
+
+
+router.post('/auth/login',strictLimiter,validateLogin,authController.login)
+router.post('/auth/register',strictLimiter,validateRegister,authController.register)
 router.get("/auth/profile",protect,authController.getProfile)
+
+// Password reset
+router.post("/auth/forgot-password", strictLimiter, authController.forgotPassword)
+router.patch("/auth/reset-password/:token", authController.resetPassword)
 
 export default router;
