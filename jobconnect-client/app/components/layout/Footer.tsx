@@ -5,7 +5,7 @@ function Footer() {
     <nav>
         {/* Logo */}
         <div>
-            <h1>Footer</h1>
+            
         </div>
      
     </nav>
