@@ -1,0 +1,33 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ── CSS Variables — Design System ── */
+:root {
+  --lime: #F1FEC6;
+  --green: #496F5D;
+  --lavender: #BCB6FF;
+  --dark: #1a2e25;
+  --gray: #556b5d;
+  --white: #FFFFFF;
+}
+
+/* ── Base styles ── */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #F1FEC6;
+  color: #1a2e25;
+  font-family: var(--font-dm-sans), sans-serif;
+  font-weight: 300;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-bricolage), sans-serif;
+  font-weight: 800;
+  color: #1a2e25;
+}
