@@ -1,21 +1,18 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
+
 
 /* ── CSS Variables — Design System ── */
-:root {
-  --lime: #F1FEC6;
-  --green: #496F5D;
-  --lavender: #BCB6FF;
-  --dark: #1a2e25;
-  --gray: #556b5d;
-  --white: #FFFFFF;
+@theme {
+  --color-lime: #F1FEC6;
+  --color-green: #496F5D;
+  --color-lavender: #BCB6FF;
+  --color-dark: #1a2e25;
+  --color-gray: #556b5d;
+  --color-white: #FFFFFF;
 }
 
 /* ── Base styles ── */
 * {
-  margin: 0;
-  padding: 0;
   box-sizing: border-box;
 }
 

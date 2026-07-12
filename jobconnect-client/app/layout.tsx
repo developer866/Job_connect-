@@ -1,6 +1,8 @@
 import type { Metadata } from "next"
 import { Bricolage_Grotesque, DM_Sans } from "next/font/google"
 import "./globals.css"
+import Navbar from "./components/layout/Navbar"
+import Footer from "./components/layout/Footer"
 
 // Bold font for headings
 const bricolage = Bricolage_Grotesque({
@@ -28,8 +30,10 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={`${bricolage.variable} ${dmSans.variable}`}>
+      <body className={`${bricolage.variable} ${dmSans.variable} `} >
+        <Navbar />
         {children}
+        <Footer />
       </body>
     </html>
   )
