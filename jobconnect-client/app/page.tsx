@@ -4,7 +4,7 @@ import Button from "./components/ui/Buttons";
 
 function page() {
   return (
-    <div className="min-h-screen">
+    <div className="pt-5">
       <Button variant="secondary">Save</Button>
     </div>
   );
