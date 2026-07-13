@@ -36,7 +36,7 @@ app.use(cors({
 
 app.use(express.json({ limit: "10kb" }))
 app.use(express.urlencoded({ extended: true, limit: "10kb" }))
-const port = 3000;
+const port = 5000;
 
 // Socket.io 
 const io = initSocket(server)

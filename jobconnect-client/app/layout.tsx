@@ -3,6 +3,7 @@ import { Bricolage_Grotesque, DM_Sans } from "next/font/google"
 import "./globals.css"
 import { AuthProvider } from "@/context/AuthContext"
 import Navbar from "./components/layout/Navbar"
+import Footer from "./components/layout/Footer"
 
 const bricolage = Bricolage_Grotesque({
   subsets: ["latin"],
@@ -29,10 +30,12 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${bricolage.variable} ${dmSans.variable}`}>
-        {/* AuthProvider wraps everything so any component can access auth */}
         <AuthProvider>
           <Navbar />
-          {children}
+          <main className="min-h-screen">
+            {children}
+          </main>
+          <Footer />
         </AuthProvider>
       </body>
     </html>
