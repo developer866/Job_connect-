@@ -75,7 +75,6 @@ import { validateRegister,validateLogin } from "../middleware/validate";
 import { strictLimiter } from "../middleware/rateLimiter";
 const router = Router()
 
-
 router.post('/auth/login',strictLimiter,validateLogin,authController.login)
 router.post('/auth/register',strictLimiter,validateRegister,authController.register)
 router.get("/auth/profile",protect,authController.getProfile)

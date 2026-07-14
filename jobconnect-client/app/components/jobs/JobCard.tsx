@@ -61,11 +61,11 @@ export default function JobCard({ job, showApply = true }: JobCardProps) {
           </div>
 
           {/* Company */}
-          <p className="font-body text-sm font-medium text-[#496F5D] mb-3">
+          {/* <p className="font-body text-sm font-medium text-[#496F5D] mb-3">
             {typeof job.employer === "object"
               ? job.employer.companyName
               : "Company"}
-          </p>
+          </p> */}
 
           {/* Meta info */}
           <div className="flex flex-wrap gap-3 text-xs font-light text-[#9CA3AF] mb-4">

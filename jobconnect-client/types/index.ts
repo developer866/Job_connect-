@@ -35,6 +35,7 @@ export interface Job {
     max: number
     currency: "NGN" | "USD"
   }
+  companyName:string
   skills: string[]
   experience: "entry" | "junior" | "mid"
   status: "pending" | "approved" | "rejected" | "closed"

@@ -105,7 +105,7 @@ const router = Router();
 import { validateJob } from "../middleware/validate";
 import { employerLimiter } from "../middleware/rateLimiter";
 // ── Public routes ──
-router.get("/jobs",validateJob,employerLimiter, jobController.getAllJobs)
+router.get("/jobs",employerLimiter, jobController.getAllJobs)
 router.get("/jobs/:id", jobController.getSingleJob)
 
 // ── Protected routes — employer only ──
