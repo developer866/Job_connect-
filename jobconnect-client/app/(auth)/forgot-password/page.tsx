@@ -1,9 +1,7 @@
-import React from 'react'
-
-function page() {
+export default function ResetPasswordPage() {
   return (
-    <div>page</div>
-  )
+    <div>
+      Reset Password
+    </div>
+  );
 }
-
-export default page
