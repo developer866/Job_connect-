@@ -66,7 +66,7 @@ export default function RegisterPage() {
         setShowWelcome(true)
       } else {
         // Show validation errors or message
-        setError(res.message || res.errors?.[0]?.message || "Registration failed")
+        setError(res.message || "Registration failed")
       }
     } catch {
       setError("Something went wrong. Please try again.")
