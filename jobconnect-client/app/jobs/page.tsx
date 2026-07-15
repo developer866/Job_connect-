@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useEffect, useCallback } from "react"
+import { useState, useEffect, useCallback,Suspense } from "react"
 import { Briefcase, SlidersHorizontal } from "lucide-react"
 import JobCard from "@/app/components/jobs/JobCard"
 import JobFilter from "@/app/components/jobs/JobFilter"
@@ -16,7 +16,7 @@ interface Filters {
   experience: string
 }
 
-export default function JobsPage() {
+function JobsContent(){
   const searchParams = useSearchParams()
   const [jobs, setJobs] = useState<Job[]>([])
   const [loading, setLoading] = useState(true)
@@ -29,7 +29,7 @@ export default function JobsPage() {
     type: "",
     experience: "",
   })
-
+  
   const fetchJobs = useCallback(async (activeFilters: Filters) => {
     setLoading(true)
     try {
@@ -60,9 +60,9 @@ export default function JobsPage() {
   const handleFilter = (newFilters: Filters) => {
     setFilters(newFilters)
   }
-
   return (
-    <div className="min-h-screen bg-[#F1FEC6]">
+    <div>
+       <div className="min-h-screen bg-[#F1FEC6]">
 
       {/* ── Page Header ── */}
       <section className="bg-[#496F5D] py-16 px-6">
@@ -138,5 +138,17 @@ export default function JobsPage() {
         </div>
       </section>
     </div>
+    </div>
+  )
+}
+export default function JobsPage() {
+  
+
+  return (
+   <div>
+    <Suspense fallback={<div>Loading.....</div>} >
+      <JobsContent />
+    </Suspense>
+   </div>
   )
 }
