@@ -1,9 +1,12 @@
+"use client"
+
 import type { Metadata } from "next"
 import { Bricolage_Grotesque, DM_Sans } from "next/font/google"
 import "./globals.css"
 import { AuthProvider } from "@/context/AuthContext"
-import Navbar from "./components/layout/Navbar"
-import Footer from "./components/layout/Footer"
+import Navbar from "@/app/components/layout/Navbar"
+import Footer from "@/app/components/layout/Footer"
+import { usePathname } from "next/navigation"
 
 const bricolage = Bricolage_Grotesque({
   subsets: ["latin"],
@@ -17,9 +20,24 @@ const dmSans = DM_Sans({
   variable: "--font-dm-sans",
 })
 
-export const metadata: Metadata = {
-  title: "JobConnect — Nigeria's Junior Tech Job Board",
-  description: "Connecting fresh graduates and junior developers with startups and SMEs across Nigeria.",
+function AppLayout({ children }: { children: React.ReactNode }) {
+  const pathname = usePathname()
+
+  // Hide navbar and footer on dashboard pages
+  const isDashboard =
+    pathname.startsWith("/jobseeker") ||
+    pathname.startsWith("/employer") ||
+    pathname.startsWith("/admin")
+
+  return (
+    <>
+      {!isDashboard && <Navbar />}
+      <main className={isDashboard ? "" : "min-h-screen"}>
+        {children}
+      </main>
+      {!isDashboard && <Footer />}
+    </>
+  )
 }
 
 export default function RootLayout({
@@ -31,11 +49,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${bricolage.variable} ${dmSans.variable}`}>
         <AuthProvider>
-          <Navbar />
-          <main className="min-h-screen">
-            {children}
-          </main>
-          <Footer />
+          <AppLayout>{children}</AppLayout>
         </AuthProvider>
       </body>
     </html>
