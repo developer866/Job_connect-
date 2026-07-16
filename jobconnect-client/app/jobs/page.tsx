@@ -18,6 +18,7 @@ interface Filters {
 
 function JobsContent(){
   const searchParams = useSearchParams()
+  
   const [jobs, setJobs] = useState<Job[]>([])
   const [loading, setLoading] = useState(true)
   const [totalCount, setTotalCount] = useState(0)

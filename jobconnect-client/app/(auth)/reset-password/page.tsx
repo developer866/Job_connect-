@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import { useState, useEffect,Suspense } from "react"
 import { useSearchParams, useRouter } from "next/navigation"
 import Link from "next/link"
 import { Eye, EyeOff, CheckCircle } from "lucide-react"
@@ -8,8 +8,9 @@ import Button from "@/app/components/ui/Buttons"
 import Input from "@/app/components/ui/Input"
 import { resetPassword } from "@/lib/api"
 
-export default function ResetPasswordPage() {
-  const searchParams = useSearchParams()
+function ResetPasswordContent(){
+    const searchParams = useSearchParams()
+
   const router = useRouter()
   const token = searchParams.get("token")
 
@@ -19,7 +20,7 @@ export default function ResetPasswordPage() {
   const [loading, setLoading] = useState(false)
   const [success, setSuccess] = useState(false)
   const [error, setError] = useState("")
-
+  
   // Redirect if no token
   useEffect(() => {
     if (!token) {
@@ -209,6 +210,14 @@ export default function ResetPasswordPage() {
           )}
         </div>
       </div>
-    </div>
+    </div>)
+}
+
+
+export default function ResetPasswordPage() {
+  return (
+    <Suspense fallback={<div>loading...</div>}>
+      <ResetPasswordContent />
+    </Suspense>
   )
 }
